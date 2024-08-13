@@ -1,0 +1,41 @@
+@import "src/app/styles/media";
+
+.button {
+  border: none;
+  background: none;
+  font-size: 24px;
+  border-radius: 50%;
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 65px;
+  height: 65px;
+  transition: background 0.2s ease;
+  cursor: pointer;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 500;
+
+  @media (min-width: $media-md + 1) {
+    &:hover {
+      background: var(--color-secondary);
+    }
+
+    &:active {
+      background: var(--color-secondary);
+      scale: 1.05;
+    }
+  }
+}
+
+@media (max-width: $media-md) {
+  .button {
+    box-shadow: var(--shadow-s);
+    background: var(--color-secondary);
+
+    &:active {
+      background: var(--color-primary);
+    }
+  }
+}

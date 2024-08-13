@@ -1,0 +1,59 @@
+@import "src/app/styles/media";
+
+.calculator {
+  box-sizing: border-box;
+  padding: var(--padding-m);
+  background: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-l);
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  width: var(--calculator-width);
+  height: var(--calculator-height);
+  border-radius: var(--radius);
+
+  &_scoreboard {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-l);
+
+    &_expression {
+      text-align: end;
+      color: var(--color-white);
+      font-size: var(--text-s);
+    }
+  }
+
+  &_line {
+    width: 100%;
+    height: 0.5px;
+    background: var(--color-white);
+    border-radius: 2px;
+  }
+
+  &_actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-m);
+
+    &_row {
+      display: flex;
+      gap:var(--gap-m);
+      width: 100%;
+      justify-content: space-evenly;
+    }
+  }
+}
+
+@media (max-width: $media-md) {
+  .calculator {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+}
+

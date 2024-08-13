@@ -1,0 +1,29 @@
+@import "src/app/styles/media";
+
+.page {
+  margin: auto;
+  width: clamp(340px, 100vw, 1440px);
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.page_card {
+  margin: auto;
+  padding: var(--padding-l) var(--padding-m) ;
+  background: var(--bg-color-secondary);
+  box-shadow: var(--shadow);
+  width: var(--calculator-width);
+  height: var(--calculator-height);
+  border-radius: var(--radius);
+}
+
+@media (max-width: $media-md) {
+  .page_card {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+}
