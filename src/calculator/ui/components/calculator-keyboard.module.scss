@@ -1,0 +1,11 @@
+.calculator_keyboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  justify-items: center;
+  align-items: center;
+  gap: var(--gap-m);
+
+  &_btn {
+  }
+}

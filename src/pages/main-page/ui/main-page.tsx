@@ -1,4 +1,4 @@
-import { Calculator } from '@/features/calculator';
+import { Calculator } from '@/calculator';
 import cls from './main-page.module.scss';
 
 export const MainPage = () => {

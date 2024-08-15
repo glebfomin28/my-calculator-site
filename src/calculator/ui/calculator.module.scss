@@ -1,4 +1,4 @@
-@import "src/app/styles/media";
+@import "@/app/styles/media";
 
 .calculator {
   box-sizing: border-box;
@@ -34,18 +34,24 @@
   }
 
   &_actions {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+
     align-items: center;
     justify-content: center;
-    gap: var(--gap-m);
+    gap: var(--gap-s);
 
-    &_row {
-      display: flex;
-      gap:var(--gap-m);
-      width: 100%;
-      justify-content: space-evenly;
+    &_btn {
+
     }
+
+    //&_row {
+    //  display: flex;
+    //  gap:var(--gap-m);
+    //  width: 100%;
+    //  justify-content: space-evenly;
+    //}
   }
 }
 
