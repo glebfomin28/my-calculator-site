@@ -7,14 +7,14 @@ export const useFocusInput = (calcValue: string) => {
 
   const handleFocus = () => {
     if (inputRef.current) {
-      setCursorPosition(inputRef.current.selectionStart || 0);
+      // setCursorPosition(inputRef.current.selectionStart || 0);
     }
   };
 
   useEffect(() => {
     if (inputRef.current) {
-      inputRef.current.focus();
-      inputRef.current.setSelectionRange(cursorPosition, cursorPosition);
+      // inputRef.current.focus();
+      // inputRef.current.setSelectionRange(cursorPosition, cursorPosition);
     }
   }, [calcValue, cursorPosition]);
 

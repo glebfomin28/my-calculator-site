@@ -3,10 +3,11 @@
 .page {
   margin: auto;
   width: clamp(340px, 100vw, 1440px);
-  height: 100dvh;
+  height: 100lvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: var(--bg-color-primary);
 }
 
 .page_card {

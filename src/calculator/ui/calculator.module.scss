@@ -41,24 +41,13 @@
     align-items: center;
     justify-content: center;
     gap: var(--gap-s);
-
-    &_btn {
-
-    }
-
-    //&_row {
-    //  display: flex;
-    //  gap:var(--gap-m);
-    //  width: 100%;
-    //  justify-content: space-evenly;
-    //}
   }
 }
 
 @media (max-width: $media-md) {
   .calculator {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     border-radius: 0;
   }
 }

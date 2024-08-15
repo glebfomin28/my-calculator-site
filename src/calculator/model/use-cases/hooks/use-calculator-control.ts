@@ -1,21 +1,19 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { useHandleKeyDown } from '@/shared/hooks/use-handle-key-down';
 
 import { calculatorFormat, checkResult, isActions, replaceDotsWithCommas } from '../utils/calculator-utils';
 import { convertInfixToPostfix } from '../utils/convert-infix-to-postfix';
 import { calculatePostfix } from '../utils/calculate-postfix';
 import { OperatorType } from '../../types/operators.type';
-import { useFocusInput } from './use-focus-input';
 
 export const useCalculatorControl = () => {
   const [calcValue, setCalcValue] = useState<string>('');
   const [expressionValue, setExpressionValue] = useState<string>('');
 
-  const { inputRef, handleFocus, cursorPosition, setCursorPosition } = useFocusInput(calcValue);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCalcValue(calculatorFormat(e.target.value));
-    setCursorPosition((p) => p + 1);
   };
 
   const clearState = () => {
@@ -28,12 +26,10 @@ export const useCalculatorControl = () => {
     const postfix = convertInfixToPostfix(calcValue);
     const result = calculatePostfix(postfix);
     setCalcValue(checkResult(result));
-    setCursorPosition(result.length);
   };
 
   const handleBackspace = () => {
-    setCalcValue((p) => p.slice(0, cursorPosition - 1) + p.slice(cursorPosition));
-    setCursorPosition((p) => (p > 0 ? p - 1 : 0));
+    setCalcValue((p) => p.slice(0, p.length - 1));
   };
 
   const actionEvents = (actionKey: string) => {
@@ -43,14 +39,15 @@ export const useCalculatorControl = () => {
   };
 
   const calculate = (key: OperatorType | string) => {
+    inputRef?.current?.blur();
+
     try {
       if (isActions(key)) actionEvents(key);
       else {
         let newValue = key;
         if (expressionValue) setExpressionValue('');
         if (key === 'π') newValue = replaceDotsWithCommas(Math.PI.toString());
-        setCalcValue((p) => p.slice(0, cursorPosition) + newValue + p.slice(cursorPosition));
-        setCursorPosition((p) => p + newValue.length);
+        setCalcValue((p) => p + newValue);
       }
     } catch (e) {
       console.error(e);
@@ -71,6 +68,5 @@ export const useCalculatorControl = () => {
     expressionValue,
     handleChange,
     calculate,
-    handleFocus,
   };
 };
