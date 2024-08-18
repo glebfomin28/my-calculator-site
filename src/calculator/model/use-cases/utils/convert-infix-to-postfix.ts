@@ -23,12 +23,11 @@ export function convertInfixToPostfix(expression: string): string[] {
         operatorStack.push('/');
         outputQueue.push('100');
       } else {
-        while (
-          operatorStack.length > 0 &&
-          isOperator(operatorStack[operatorStack.length - 1]) &&
-          operatorsPrecedence[operatorStack[operatorStack.length - 1] as OperatorType] >=
-            operatorsPrecedence[token as OperatorType]
-        ) {
+        const isNotEmptyOperators = operatorStack.length > 0 && isOperator(operatorStack[operatorStack.length - 1]);
+        const pastOperator = operatorsPrecedence[operatorStack[operatorStack.length - 1] as OperatorType];
+        const currentOperator = operatorsPrecedence[token as OperatorType];
+
+        while (isNotEmptyOperators && pastOperator >= currentOperator) {
           outputQueue.push(operatorStack.pop()!);
         }
         operatorStack.push(token);
@@ -37,6 +36,7 @@ export function convertInfixToPostfix(expression: string): string[] {
   }
 
   while (operatorStack.length > 0) {
+    console.log('while');
     outputQueue.push(operatorStack.pop()!);
   }
 

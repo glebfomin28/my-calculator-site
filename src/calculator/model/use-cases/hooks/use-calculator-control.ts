@@ -1,7 +1,13 @@
 import { ChangeEvent, useRef, useState } from 'react';
 import { useHandleKeyDown } from '@/shared/hooks/use-handle-key-down';
 
-import { calculatorFormat, checkResult, isActions, replaceDotsWithCommas } from '../utils/calculator-utils';
+import {
+  calculatorFormat,
+  checkResult,
+  isActions,
+  isErrorCalc,
+  replaceDotsWithCommas,
+} from '../utils/calculator-utils';
 import { convertInfixToPostfix } from '../utils/convert-infix-to-postfix';
 import { calculatePostfix } from '../utils/calculate-postfix';
 import { OperatorType } from '../../types/operators.type';
@@ -12,7 +18,14 @@ export const useCalculatorControl = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const checkValueAndReset = () => {
+    if (isErrorCalc(calcValue)) {
+      setCalcValue('');
+    }
+  };
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    checkValueAndReset();
     setCalcValue(calculatorFormat(e.target.value));
   };
 
@@ -40,6 +53,7 @@ export const useCalculatorControl = () => {
 
   const calculate = (key: OperatorType | string) => {
     inputRef?.current?.blur();
+    checkValueAndReset();
 
     try {
       if (isActions(key)) actionEvents(key);

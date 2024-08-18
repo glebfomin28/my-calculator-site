@@ -5,11 +5,20 @@ const eslintConfig = {
     'airbnb-typescript',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:jest/recommended',
     'prettier',
+  ],
+  plugins: [
+    'react',
+    '@typescript-eslint',
+    'react-hooks',
+    'jest',
   ],
   env: {
     browser: true,
     es2022: true,
+    node: "current",
+    'jest/globals': true,
   },
   parserOptions: {
     ecmaFeatures: {
@@ -21,28 +30,16 @@ const eslintConfig = {
   },
   ignorePatterns: [
     'vite.config.ts',
-    'src/shared/assets',
     'public',
     '.eslintrc.cjs',
+    'babel.config.cjs',
+    'jest.config.ts'
   ],
-  plugins: [
-    'react',
-    '@typescript-eslint',
-    'react-hooks',
-    ],
+
   rules: {
     semi: ['error', 'always'],
     'eol-last': ['error', 'always'],
     'object-curly-spacing': ['error', 'always'],
-    // 'react/jsx-indent': [2, 2],
-    // 'react/jsx-indent-props': [2, 2],
-    // indent: [2, 2],
-    // 'react/jsx-filename-extension': [
-    //   2,
-    //   {
-    //     extensions: ['.js', '.jsx', '.tsx'],
-    //   },
-    // ],
     'no-nested-ternary': 'warn',
     'consistent-return': 'off',
     '@typescript-eslint/naming-convention': 'warn',
@@ -91,6 +88,7 @@ const eslintConfig = {
     'jsx-a11y/no-noninteractive-element-interactions': 'warn',
     'jsx-a11y/no-noninteractive-tabindex': 'warn',
     'default-case': 'warn',
+    'jest/no-focused-tests': 'off',
   },
   overrides: [
     {

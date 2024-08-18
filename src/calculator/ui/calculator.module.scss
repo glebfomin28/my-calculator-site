@@ -23,6 +23,8 @@
       text-align: end;
       color: var(--color-white);
       font-size: var(--text-s);
+      overflow-x: auto;
+      min-height: 35px;
     }
   }
 

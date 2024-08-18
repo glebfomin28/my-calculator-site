@@ -30,3 +30,7 @@ export function checkResult(value: string) {
 
   return '';
 }
+
+export function isErrorCalc(value: string): boolean {
+  return ['Infinity', 'null', 'undefined', 'NaN'].includes(value);
+}
