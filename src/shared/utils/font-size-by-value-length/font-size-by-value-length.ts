@@ -1,9 +1,12 @@
-export const fontSizeByValueLength = (value: string) => {
-  if (value?.length < 17) {
-    return 32;
+export const fontSizeByValueLength = (
+  value: string,
+  { fontSizeMin, fontSizeMax, maxLength }: { fontSizeMin: number; fontSizeMax: number; maxLength: number },
+) => {
+  if (value?.length < maxLength) {
+    return fontSizeMax;
   }
 
-  const dynamicSize = 32 - (value.length - 14) * 0.75;
+  const dynamicSize = fontSizeMax - Math.max(0, value.length - maxLength) * 1.1;
 
-  return dynamicSize <= 12 ? 12 : dynamicSize;
+  return dynamicSize <= fontSizeMin ? fontSizeMin : dynamicSize;
 };

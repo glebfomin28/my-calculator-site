@@ -1,6 +1,12 @@
-import { isNumber, isOperator, replaceCommasWithDots, replaceDotsWithCommas } from './calculator-utils';
+import {
+  replaceDotsWithCommas,
+  replaceCommasWithDots,
+  isNumber,
+  isOperator,
+} from '../../../../helpers/calculator-utils';
 
 export function calculatePostfix(postfix: string[]): string {
+  if (!postfix?.length) return '';
   const stack: number[] = [];
 
   for (const token of postfix) {
@@ -11,6 +17,7 @@ export function calculatePostfix(postfix: string[]): string {
     } else if (isOperator(token)) {
       const b = stack.pop()!;
       const a = stack.pop()!;
+
       switch (token) {
         case '+':
           stack.push(a + b);

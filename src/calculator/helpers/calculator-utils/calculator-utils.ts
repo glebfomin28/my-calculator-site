@@ -1,9 +1,9 @@
-import { CALCULATOR_INPUT_PATTERN } from '../../../config/calculator-pattern.config';
-import { operatorsPrecedence } from '@/calculator/config/operators-precedence.config';
+import { operatorsPrecedence } from '../../config/operators-precedence.config';
+import { CALCULATOR_INPUT_PATTERN } from '../../config/calculator-pattern.config';
 
-export const calculatorFormat = (value: string) => {
+export function calculatorFormat(value: string) {
   return value.replace(CALCULATOR_INPUT_PATTERN, '');
-};
+}
 
 export function replaceCommasWithDots(token: string): string {
   return token.replace(',', '.');
@@ -23,12 +23,6 @@ export function isOperator(token: string): boolean {
 
 export function isActions(token: string): boolean {
   return ['C', '=', '<='].includes(token);
-}
-
-export function checkResult(value: string) {
-  if (isNumber(value)) return value;
-
-  return '';
 }
 
 export function isErrorCalc(value: string): boolean {
