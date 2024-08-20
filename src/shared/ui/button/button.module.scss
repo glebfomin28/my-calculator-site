@@ -1,4 +1,4 @@
-@import "src/app/styles/media";
+@import "@/app/styles/media";
 
 .button {
   border: none;
@@ -16,7 +16,27 @@
   cursor: pointer;
   font-family: "Roboto Mono", monospace;
   font-weight: 500;
+}
 
+
+// mode
+.white {
+  background: var(--color-white);
+  color: var(--color-primary);
+
+  @media (min-width: $media-md + 1) {
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 0.7;
+      scale: 1.05;
+    }
+  }
+}
+
+.blue {
   @media (min-width: $media-md + 1) {
     &:hover {
       background: var(--color-secondary);
@@ -25,17 +45,6 @@
     &:active {
       background: var(--color-secondary);
       scale: 1.05;
-    }
-  }
-}
-
-@media (max-width: $media-md) {
-  .button {
-    box-shadow: var(--shadow-s);
-    background: var(--color-secondary);
-
-    &:active {
-      background: var(--color-primary);
     }
   }
 }

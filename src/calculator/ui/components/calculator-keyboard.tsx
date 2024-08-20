@@ -7,7 +7,12 @@ export const CalculatorKeyboard = ({ onClick }: { onClick: (v: string) => void }
   return (
     <div className={cls.calculator_keyboard}>
       {calculatorKeyBoardConfig.map((item) => (
-        <Button className={cls.calculator_keyboard_btn} key={item.value} onClick={() => onClick(item.value)}>
+        <Button
+          className={cls.calculator_keyboard_btn}
+          key={item.value}
+          onClick={() => onClick(item.value)}
+          mode={item.value === '=' ? 'white' : 'blue'}
+        >
           {item.label}
         </Button>
       ))}
