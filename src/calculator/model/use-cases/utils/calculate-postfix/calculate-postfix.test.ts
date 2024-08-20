@@ -15,7 +15,7 @@ describe('calculatePostfix', () => {
     { postfix: ['0', '0', '/', '1', '+'], expected: 'NaN' },
     { postfix: ['5', '0', '/'], expected: 'Infinity' },
     { postfix: ['5', '0', '*'], expected: '0' },
-  ])('should return', ({ postfix, expected }) => {
+  ])('should return postfix array', ({ postfix, expected }) => {
     expect(calculatePostfix(postfix)).toBe(expected);
   });
 });

@@ -1,103 +1,108 @@
+import { TokenType } from '../model/types/calculator-token.type';
+import { ActionsEnum } from '@/calculator/model/enums/actions.enum';
+import { OperatorsEnum } from '@/calculator/model/enums/operators.enum';
+import { NumbersEnum } from '@/calculator/model/enums/numbers.enum';
+
 type CalculatorKeyBoardType = {
-  key: string;
+  value: TokenType | string;
   label: string;
 };
 
 export const calculatorKeyBoardConfig: CalculatorKeyBoardType[] = [
   {
-    key: 'C',
-    label: 'C',
+    value: ActionsEnum.Clear,
+    label: ActionsEnum.Clear,
   },
   {
-    key: '(',
-    label: '(',
+    value: OperatorsEnum.ParenthesesOpen,
+    label: OperatorsEnum.ParenthesesOpen,
   },
   {
-    key: ')',
-    label: ')',
+    value: OperatorsEnum.ParenthesesClose,
+    label: OperatorsEnum.ParenthesesClose,
   },
   {
-    key: '<=',
-    label: '<=',
+    value: ActionsEnum.Erase,
+    label: ActionsEnum.Erase,
   },
   {
-    key: '^(',
-    label: '^',
+    value: `${OperatorsEnum.Exponentiation}(`,
+    label: OperatorsEnum.Exponentiation,
   },
   {
-    key: '√(',
-    label: '√',
+    value: `${OperatorsEnum.SquareRoot}(`,
+    label: OperatorsEnum.SquareRoot,
   },
   {
-    key: '/',
-    label: '/',
+    value: OperatorsEnum.Division,
+    label: OperatorsEnum.Division,
   },
   {
-    key: '*',
+    value: OperatorsEnum.Multiplication,
     label: 'x',
   },
   {
-    key: '7',
-    label: '7',
+    value: NumbersEnum.Seven,
+    label: NumbersEnum.Seven,
   },
   {
-    key: '8',
-    label: '8',
+    value: NumbersEnum.Nine,
+    label: NumbersEnum.Nine,
   },
   {
-    key: '9',
-    label: '9',
+    value: NumbersEnum.Eight,
+    label: NumbersEnum.Eight,
   },
   {
-    key: '-',
-    label: '-',
+    value: OperatorsEnum.Subtraction,
+    label: OperatorsEnum.Subtraction,
   },
   {
-    key: '4',
-    label: '4',
+    value: NumbersEnum.Four,
+    label: NumbersEnum.Four,
   },
   {
-    key: '5',
-    label: '5',
+    value: NumbersEnum.Five,
+    label: NumbersEnum.Five,
   },
   {
-    key: '6',
-    label: '6',
+    value: NumbersEnum.Six,
+    label: NumbersEnum.Six,
   },
   {
-    key: '+',
-    label: '+',
+    value: OperatorsEnum.Addition,
+    label: OperatorsEnum.Addition,
   },
   {
-    key: '1',
-    label: '1',
+    value: NumbersEnum.One,
+    label: NumbersEnum.One,
   },
   {
-    key: '2',
-    label: '2',
+    value: NumbersEnum.Two,
+    label: NumbersEnum.Two,
   },
   {
-    key: '3',
-    label: '3',
+    value: NumbersEnum.Three,
+    label: NumbersEnum.Three,
   },
   {
-    key: '%',
-    label: '%',
+    value: OperatorsEnum.Percent,
+    label: OperatorsEnum.Percent,
   },
   {
-    key: 'π',
-    label: 'π',
+    value: OperatorsEnum.Pi,
+    label: OperatorsEnum.Pi,
   },
   {
-    key: '0',
-    label: '0',
+    value: NumbersEnum.Zero,
+    label: NumbersEnum.Zero,
   },
   {
-    key: ',',
-    label: ',',
+    value: OperatorsEnum.Comma,
+    label: OperatorsEnum.Comma,
   },
   {
-    key: '=',
-    label: '=',
+    value: ActionsEnum.Equals,
+    label: ActionsEnum.Equals,
   },
 ];

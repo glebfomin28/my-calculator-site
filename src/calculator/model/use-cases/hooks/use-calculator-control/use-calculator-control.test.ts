@@ -1,5 +1,8 @@
 import { act, renderHook } from '@testing-library/react';
 import { useCalculatorControl } from './use-calculator-control';
+import { ActionsEnum } from '../../../enums/actions.enum';
+import { OperatorsEnum } from '../../../enums/operators.enum';
+import { NumbersEnum } from '../../../enums/numbers.enum';
 
 jest.mock('../../utils/infix-to-postfix-converter/infix-to-postfix-converter', () => ({
   infixToPostfixConverter: jest.fn().mockReturnValue(['1', '2', '+']),
@@ -9,10 +12,11 @@ jest.mock('../../utils/calculate-postfix/calculate-postfix', () => ({
   calculatePostfix: jest.fn().mockReturnValue('3'),
 }));
 
-jest.mock('../../../../helpers/calculator-utils', () => ({
+jest.mock('../../utils/calculator-utils', () => ({
   replaceDotsWithCommas: jest.fn((value: string) => value),
   calculatorFormat: jest.fn((value: string) => value),
   isActions: jest.fn((value) => ['C', '=', '<='].includes(value)),
+  isOperator: jest.fn((value) => ['+', '-', '/', '*'].includes(value)),
   isErrorCalc: jest.fn(() => false),
   isNumber: jest.fn(() => true),
 }));
@@ -40,7 +44,7 @@ describe('use-calculator-control', () => {
 
     act(() => {
       result.current.handleChange({ target: { value: '123' } } as React.ChangeEvent<HTMLInputElement>);
-      result.current.calculate('C');
+      result.current.calculate(ActionsEnum.Clear);
     });
 
     expect(result.current.calcValue).toBe('');
@@ -57,7 +61,7 @@ describe('use-calculator-control', () => {
     expect(result.current.calcValue).toBe('1+2');
 
     act(() => {
-      result.current.calculate('=');
+      result.current.calculate(ActionsEnum.Equals);
     });
 
     expect(result.current.calcValue).toBe('3');
@@ -69,7 +73,7 @@ describe('use-calculator-control', () => {
 
     act(() => {
       result.current.handleChange({ target: { value: '123' } } as React.ChangeEvent<HTMLInputElement>);
-      result.current.calculate('<=');
+      result.current.calculate(ActionsEnum.Erase);
     });
 
     expect(result.current.calcValue).toBe('12');
@@ -78,23 +82,24 @@ describe('use-calculator-control', () => {
   it('should calculate the result of a sequence of actions', () => {
     const { result } = renderHook(() => useCalculatorControl());
 
+    // userEvent.click(() => result.current.calculate('1'));
     act(() => {
       result.current.calculate('1');
     });
     expect(result.current.calcValue).toBe('1');
 
     act(() => {
-      result.current.calculate('+');
+      result.current.calculate(OperatorsEnum.Addition);
     });
     expect(result.current.calcValue).toBe('1+');
 
     act(() => {
-      result.current.calculate('2');
+      result.current.calculate(NumbersEnum.Two);
     });
     expect(result.current.calcValue).toBe('1+2');
 
     act(() => {
-      result.current.calculate('=');
+      result.current.calculate(ActionsEnum.Equals);
     });
 
     expect(result.current.calcValue).toBe('3');

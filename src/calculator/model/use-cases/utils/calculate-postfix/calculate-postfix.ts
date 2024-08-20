@@ -1,9 +1,5 @@
-import {
-  replaceDotsWithCommas,
-  replaceCommasWithDots,
-  isNumber,
-  isOperator,
-} from '../../../../helpers/calculator-utils';
+import { isNumber, isOperator, replaceCommasWithDots, replaceDotsWithCommas } from '../calculator-utils';
+import { OperatorsEnum } from '../../../enums/operators.enum';
 
 export function calculatePostfix(postfix: string[]): string {
   if (!postfix?.length) return '';
@@ -12,26 +8,26 @@ export function calculatePostfix(postfix: string[]): string {
   for (const token of postfix) {
     if (isNumber(token)) {
       stack.push(Number(replaceCommasWithDots(token)));
-    } else if (token === '√') {
+    } else if (isOperator(token) && token === OperatorsEnum.SquareRoot) {
       stack.push(Math.sqrt(stack.pop()!));
     } else if (isOperator(token)) {
       const b = stack.pop()!;
       const a = stack.pop()!;
 
       switch (token) {
-        case '+':
+        case OperatorsEnum.Addition:
           stack.push(a + b);
           break;
-        case '-':
+        case OperatorsEnum.Subtraction:
           stack.push(a - b);
           break;
-        case '*':
+        case OperatorsEnum.Multiplication:
           stack.push(a * b);
           break;
-        case '/':
+        case OperatorsEnum.Division:
           stack.push(a / b);
           break;
-        case '^':
+        case OperatorsEnum.Exponentiation:
           stack.push(a ** b);
           break;
       }

@@ -3,7 +3,7 @@ Demo: https://my-react-calculator-site.netlify.app/
 
 ## Описание
 
-Этот проект представляет собой веб-сайт калькулятора, написанный на React, Vite и TypeScript.  
+Калькулятор, написанный на Vite, React, scss и TypeScript. Все вычисления написанный вручную, без eval и сторонних библиотек.
 
 ## Скрипты
 
@@ -58,6 +58,4 @@ yarn configure-husky
 ```bash
 yarn test
 ```
-
-`
 

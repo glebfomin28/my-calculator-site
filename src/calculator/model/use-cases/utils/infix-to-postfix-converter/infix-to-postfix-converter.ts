@@ -1,12 +1,13 @@
-import { isNumber, isOperator } from '../../../../helpers/calculator-utils';
+import { isNumber, isOperator } from '../calculator-utils';
 import { CALCULATOR_MATCH_PATTERN } from '../../../../config/calculator-pattern.config';
 import { operatorsPrecedence } from '../../../../config/operators-precedence.config';
 import { OperatorType } from '../../../types/operators.type';
+import { OperatorsEnum } from '../../../enums/operators.enum';
 
 class InfixToPostfixConverter {
   private readonly outputQueue: string[];
 
-  private readonly operatorStack: (OperatorType | string)[];
+  private readonly operatorStack: string[];
 
   private readonly tokens: string[];
 
@@ -26,10 +27,11 @@ class InfixToPostfixConverter {
 
       if (isNumber(token)) {
         this.outputQueue.push(token);
-      } else if (token === '(') {
-        this.operatorStack.push(token);
-      } else if (token === ')') {
-        this.handleClosingParenthesis();
+      } else if (
+        isOperator(token) &&
+        (token === OperatorsEnum.ParenthesesOpen || token === OperatorsEnum.ParenthesesClose)
+      ) {
+        this.handleClosingParenthesis(token);
       } else if (isOperator(token)) {
         this.handleOperator(token, index, nextIndex);
       }
@@ -42,18 +44,22 @@ class InfixToPostfixConverter {
     return this.outputQueue;
   }
 
-  private handleClosingParenthesis() {
-    while (this.operatorStack.length > 0 && this.operatorStack[this.operatorStack.length - 1] !== '(') {
-      this.outputQueue.push(this.operatorStack.pop()!);
+  private handleClosingParenthesis(token: OperatorsEnum) {
+    if (token === OperatorsEnum.ParenthesesOpen) {
+      this.operatorStack.push(token);
+    } else if (token === OperatorsEnum.ParenthesesClose) {
+      while (this.operatorStack.length > 0 && this.operatorStack[this.operatorStack.length - 1] !== '(') {
+        this.outputQueue.push(this.operatorStack.pop()!);
+      }
+      this.operatorStack.pop(); // Удаляем открывающую скобку из стека
     }
-    this.operatorStack.pop(); // Удаляем открывающую скобку из стека
   }
 
-  private handleOperator(token: string, i: number, skip: () => void) {
-    if (token === '%') {
-      this.operatorStack.push('/');
+  private handleOperator(token: OperatorsEnum, i: number, skip: () => void) {
+    if (token === OperatorsEnum.Percent) {
+      this.operatorStack.push(OperatorsEnum.Division);
       this.outputQueue.push('100');
-    } else if (token === '-') {
+    } else if (token === OperatorsEnum.Subtraction) {
       this.handleUnaryMinus(token, i, skip);
     } else {
       this.handleBinaryOperator(token);
@@ -97,7 +103,10 @@ class InfixToPostfixConverter {
 
   private extractOperators(): string[] {
     return [...this.outputQueue.filter((item) => !isNumber(item)), ...this.operatorStack].filter(
-      (operator) => operator !== '(' && operator !== ')',
+      (operator) =>
+        isOperator(operator) &&
+        operator !== OperatorsEnum.ParenthesesOpen &&
+        operator !== OperatorsEnum.ParenthesesClose,
     );
   }
 }
