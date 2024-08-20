@@ -4,8 +4,8 @@ import cn from 'classnames';
 import cls from './input.module.scss';
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   className?: string;
 }
 

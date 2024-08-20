@@ -1,16 +1,16 @@
 import { ChangeEvent, useRef, useState } from 'react';
 import { useHandleKeyDown } from '@/shared/hooks/use-handle-key-down';
 
-import { infixToPostfixConverter } from '../utils/infix-to-postfix-converter/infix-to-postfix-converter';
-import { calculatePostfix } from '../utils/calculate-postfix/calculate-postfix';
-import { OperatorType } from '../../types/operators.type';
+import { infixToPostfixConverter } from '../../utils/infix-to-postfix-converter/infix-to-postfix-converter';
+import { calculatePostfix } from '../../utils/calculate-postfix/calculate-postfix';
+import { OperatorType } from '../../../types/operators.type';
 import {
   replaceDotsWithCommas,
   calculatorFormat,
   isActions,
   isErrorCalc,
   isNumber,
-} from '../../../helpers/calculator-utils';
+} from '../../../../helpers/calculator-utils';
 
 export const useCalculatorControl = () => {
   const [calcValue, setCalcValue] = useState<string>('');
@@ -39,8 +39,7 @@ export const useCalculatorControl = () => {
     // const postfix = convertInfixToPostfix(calcValue);
     const postfix = infixToPostfixConverter(calcValue);
     const result = calculatePostfix(postfix);
-    console.log('postfix', postfix);
-    console.log('result', result);
+
     setCalcValue(isNumber(result) ? result : '');
   };
 

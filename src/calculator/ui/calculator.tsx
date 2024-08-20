@@ -1,7 +1,7 @@
 import { Input } from '@/shared/ui/input';
 import { fontSizeByValueLength } from '@/shared/utils/font-size-by-value-length';
 
-import { useCalculatorControl } from '../model/use-cases/hooks/use-calculator-control';
+import { useCalculatorControl } from '../model/use-cases/hooks/use-calculator-control/use-calculator-control';
 import { CalculatorKeyboard } from './components/calculator-keyboard';
 import cls from './calculator.module.scss';
 

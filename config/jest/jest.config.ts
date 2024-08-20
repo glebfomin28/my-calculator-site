@@ -9,13 +9,20 @@ export default {
   rootDir: '../../',
   setupFilesAfterEnv: ['<rootDir>config/jest/jest.setup.ts'],
   moduleNameMapper: {
-    '\\.s?css$': 'identity-obj-proxy',
     '^@/(.*)$': '<rootDir>/src/$1',
+    '\\.(css|scss)$': 'identity-obj-proxy',
+    '^.+\\.svg$': 'jest-svg-transformer',
   },
 
   // Тестовое покрытие
   collectCoverage: true,
-  collectCoverageFrom: ['<rootDir>/src/**/*.{js,ts,jsx,tsx}', '!<rootDir>/src/**/*.mock.*'],
+  collectCoverageFrom: [
+    '<rootDir>/src/**/*.{js,ts,jsx,tsx}',
+    '!<rootDir>/src/**/*.mock.*',
+    '!<rootDir>/src/**/*.config.*',
+    '!<rootDir>/src/app/**/*',
+    '!<rootDir>/src/pages/**/*',
+  ],
   coverageThreshold: {
     global: {
       branches: 80,
