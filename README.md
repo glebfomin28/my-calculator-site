@@ -3,7 +3,7 @@ Demo: https://my-react-calculator-site.netlify.app/
 
 ## Описание
 
-Калькулятор, написанный на Vite, React, scss и TypeScript. Все вычисления написанный вручную, без eval и сторонних библиотек.
+Калькулятор, написанный на Vite, React, scss и TypeScript. Все вычисления написанны вручную, без eval и сторонних библиотек.
 
 ## Скрипты
 
